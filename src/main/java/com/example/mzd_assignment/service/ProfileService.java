@@ -40,7 +40,7 @@ public class ProfileService {
     public ProfileDto deleteProfile(Long id) {
         Profile profile = profileRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 프로필 없음"));
-        if (profile.isDefault_profile() == true) {
+        if (profile.isDefault_profile()) {
             throw new IllegalArgumentException("기본 프로필은 삭제할 수 없습니다.");
         }
         profileRepository.delete(profile);

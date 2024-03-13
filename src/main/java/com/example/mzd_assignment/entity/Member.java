@@ -34,13 +34,12 @@ public class Member {
     private List<Profile> profileList = new ArrayList<>();
 
     public static Member createMember(MemberDto memberDto) {
-        Member member = new Member(
+        return new Member(
                 null,
                 memberDto.getLoginId(),
                 memberDto.getPassword(),
                 memberDto.getName(),
                 new ArrayList<>()
         );
-        return member;
     }
 }
