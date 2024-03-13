@@ -1,6 +1,5 @@
 package com.example.mzd_assignment.service;
 
-import com.example.mzd_assignment.dto.MemberDto;
 import com.example.mzd_assignment.dto.ProfileDto;
 import com.example.mzd_assignment.entity.Member;
 import com.example.mzd_assignment.entity.Profile;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

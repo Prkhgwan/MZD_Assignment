@@ -1,11 +1,9 @@
 package com.example.mzd_assignment.controller;
 
 import com.example.mzd_assignment.dto.MemberDto;
-import com.example.mzd_assignment.dto.ProfileDto;
 import com.example.mzd_assignment.entity.Member;
 import com.example.mzd_assignment.service.MemberService;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
