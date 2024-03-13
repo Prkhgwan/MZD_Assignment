@@ -28,8 +28,8 @@ class MemberServiceTest {
 
     @BeforeEach
     void setUp() {
-        Member member1 = new Member(null, "loginId1", "password1", "name1", new ArrayList<>());
-        Member member2 = new Member(null, "loginId2", "password2", "name2", new ArrayList<>());
+        Member member1 = new Member(null, "loginId1", "password1", "이순신", new ArrayList<>());
+        Member member2 = new Member(null, "loginId2", "password2", "강감찬", new ArrayList<>());
 
         for (int i = 0; i < 3; i++) {
             ProfileDto profileDto1 = new ProfileDto(null, null, "테스터" + (i+1), "0101234567" + i, "서울시", i == 0);
@@ -67,11 +67,18 @@ class MemberServiceTest {
     }
 
     @Test
-    void searchByName() {
+    void searchByNameFail() {
         List<MemberDto> members = memberService.searchByName("홍길동");
 
+        assertTrue(members.isEmpty());
+    }
+
+    @Test
+    void searchByNameSuccess() {
+        List<MemberDto> members = memberService.searchByName("이순신");
+
         assertFalse(members.isEmpty());
-        assertEquals("홍길동", members.get(0).getName());
+        assertEquals("이순신", members.get(0).getName());
     }
 
     @Test
@@ -82,18 +89,16 @@ class MemberServiceTest {
 
         assertEquals("loginId1", member.getLoginId());
         assertEquals("password1", member.getPassword());
-        assertEquals("name1", member.getName());
+        assertEquals("이순신", member.getName());
     }
 
     @Test
     void detailMemberFail() {
-        Long userId = 1L;
+        Long userId = 99L;
 
         Member member = memberService.detailMember(userId);
 
-        assertEquals("loginId1", member.getLoginId());
-        assertEquals("password1", member.getPassword());
-        assertEquals("name1", member.getName());
+        assertNull(member);
     }
 
     @Test
