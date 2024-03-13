@@ -51,9 +51,9 @@ class MemberServiceTest {
 
         Member createdMember = memberService.createMember(memberDto);
 
-        assertEquals("TEST", createdMember.getLoginId());  // 로그인 ID가 "TEST"인지 확인
-        assertEquals("PASSWORD", createdMember.getPassword());  // 비밀번호가 "PASSWORD"인지 확인
-        assertEquals("홍길동", createdMember.getName());  // 이름이 "홍길동"인지 확인
+        assertEquals("TEST", createdMember.getLoginId());
+        assertEquals("PASSWORD", createdMember.getPassword());
+        assertEquals("홍길동", createdMember.getName());
     }
 
     @Test
@@ -70,9 +70,8 @@ class MemberServiceTest {
     void searchByName() {
         List<MemberDto> members = memberService.searchByName("홍길동");
 
-        // 반환된 결과가 예상대로인지 확인
-        assertFalse(members.isEmpty());  // 회원 목록이 비어 있지 않은지 확인
-        assertEquals("홍길동", members.get(0).getName());  // 첫 번째 회원의 이름이 "홍길동"인지 확인
+        assertFalse(members.isEmpty());
+        assertEquals("홍길동", members.get(0).getName());
     }
 
     @Test
@@ -81,9 +80,9 @@ class MemberServiceTest {
 
         Member member = memberService.detailMember(userId);
 
-        assertEquals("loginId1", member.getLoginId());  // 로그인 ID가 "loginId1"인지 확인
-        assertEquals("password1", member.getPassword());  // 비밀번호가 "password1"인지 확인
-        assertEquals("name1", member.getName());  // 이름이 "name1"인지 확인
+        assertEquals("loginId1", member.getLoginId());
+        assertEquals("password1", member.getPassword());
+        assertEquals("name1", member.getName());
     }
 
     @Test
@@ -92,22 +91,18 @@ class MemberServiceTest {
 
         Member member = memberService.detailMember(userId);
 
-        assertEquals("loginId1", member.getLoginId());  // 로그인 ID가 "loginId1"인지 확인
-        assertEquals("password1", member.getPassword());  // 비밀번호가 "password1"인지 확인
-        assertEquals("name1", member.getName());  // 이름이 "name1"인지 확인
+        assertEquals("loginId1", member.getLoginId());
+        assertEquals("password1", member.getPassword());
+        assertEquals("name1", member.getName());
     }
 
     @Test
     void deleteMember() {
-        // setUp 메서드에서 생성된 첫 번째 Member의 ID를 사용
         Long userId = 1L;
 
-        // deleteMember 메서드 호출
         Member deleteMember = memberService.deleteMember(userId);
 
-        // 반환된 결과가 예상대로인지 확인
-        assertEquals("loginId1", deleteMember.getLoginId());  // 삭제된 회원의 로그인 ID가 "loginId1"인지 확인
-        // 삭제된 회원이 더 이상 존재하지 않는지 확인
+        assertEquals("loginId1", deleteMember.getLoginId());
         assertNull(memberService.detailMember(userId));
     }
 }

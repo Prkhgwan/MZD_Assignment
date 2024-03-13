@@ -27,7 +27,6 @@ class ProfileServiceTest {
 
     @BeforeEach
     void setUp() {
-        // 테스트에 필요한 데이터 설정
         Member member1 = new Member(null, "loginId1", "password1", "name1", new ArrayList<>());
         memberRepository.save(member1);
         ProfileDto defaultProfileDto = new ProfileDto(null, member1.getUserId(), "테스터1", "01012345678", "서울특별시", true);

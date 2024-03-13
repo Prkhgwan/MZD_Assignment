@@ -4,12 +4,14 @@ import com.example.mzd_assignment.dto.MemberDto;
 import com.example.mzd_assignment.dto.ProfileDto;
 import com.example.mzd_assignment.entity.Member;
 import com.example.mzd_assignment.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +23,18 @@ public class MemberController {
 
     // 회원 생성(가입) API
     @PostMapping("/api/signup")
-    public ResponseEntity<Member> registMember(@RequestBody MemberDto memberDto) {
+    public ResponseEntity<Member> registMember(@Valid @RequestBody MemberDto memberDto, BindingResult result) {
+        if (result.hasErrors()) {
+            // 검증 오류 처리
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         Member registMember = memberService.createMember(memberDto);
         return (registMember != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(registMember) :
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     // 회원 리스트 출력 API
+    // URL패턴(/api/memberlist?page=0&size=[받아올 길이])
     @GetMapping("/api/memberlist")
     public ResponseEntity<Page<MemberDto>> memberList(Pageable pageable) {
         Page<MemberDto> members = memberService.list(pageable);
@@ -36,6 +43,7 @@ public class MemberController {
                 ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     // 회원 검색 출력 API
+    // URL패턴(/api/memberlist/search?name=[검색어])
     @GetMapping("/api/memberlist/search")
     public ResponseEntity<List<MemberDto>> searchMembers(@RequestParam String name) {
         List<MemberDto> members = memberService.searchByName(name);

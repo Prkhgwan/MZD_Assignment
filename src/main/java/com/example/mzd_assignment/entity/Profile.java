@@ -3,12 +3,9 @@ package com.example.mzd_assignment.entity;
 import com.example.mzd_assignment.dto.ProfileDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-@Data
+@Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,10 +33,6 @@ public class Profile {
 
     @Column(name = "DEFAULT_PROFILE")
     private boolean default_profile;
-
-//    public void setMember(Member member) {
-//        this.member = member;
-//    }
 
     public Profile(Member member, String nickName, String phoneNumber, String address, boolean default_profile) {
         this.member = member;
