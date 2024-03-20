@@ -32,6 +32,7 @@ public class MemberService {
         return MemberDto.createMemberDto(createdMember);
     }
 
+    @Transactional
     public Page<MemberDto> list(Pageable pageable) {
         return memberRepository.findAllWithDefaultProfile(pageable).map(MemberDto::fromEntity);
     }
